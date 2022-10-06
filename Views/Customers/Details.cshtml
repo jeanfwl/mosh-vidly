@@ -6,9 +6,9 @@
 
 <h1>@Model.Name</h1>
 <ul>
-    <li>Membership Type:@Model.MembershipType.Name</li>
+    <li>Membership Type: @Model.MembershipType.Name</li>
     @if (Model.Birthdate.HasValue)
     {
-        <li>Birtdate: @Model.Birthdate.Value.ToString("d")</li>
+        <li>Birthdate: @Model.Birthdate.Value.ToString("d")</li>
     }
 </ul>

@@ -115,3 +115,4 @@ E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.Migrations.ApplyAnnotationsTo
 E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.Migrations.AddMembershipTypeName.resources
 E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.Migrations.UpdateMembershipTypeNames.resources
 E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.Migrations.AddCustomerBirthdate.resources
+E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.Migrations.AddMovieAndGenre.resources

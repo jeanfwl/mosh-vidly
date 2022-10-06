@@ -106,3 +106,5 @@ E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.csproj.CoreCompileInputs.cach
 E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.csproj.CopyComplete
 E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.dll
 E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.pdb
+E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.Migrations.InitialModel.resources
+E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.csproj.GenerateResource.cache

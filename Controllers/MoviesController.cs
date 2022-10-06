@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Vidly.Models;
 using Vidly.ViewModels;
 using System.Data.Entity;
 using System.Linq;
+using System;
 
 namespace Vidly.Controllers
 {
@@ -40,30 +40,78 @@ namespace Vidly.Controllers
             return View(movie);
         }
 
-        public ActionResult Random()
+        public ActionResult New()
         {
-            var movie = new Movie() { Name = "Bons de bico 2" };
-
-            var customers = new List<Customer> {
-                new Customer { Name = "Jean" },
-                new Customer { Name = "Zaito" }
+            var viewModel = new MovieFormViewModel {
+                Genres = _context.Genres.ToList(),
+                Title = "New"
             };
 
-            var viewModel = new RandomMovieViewModel {
-                Movie = movie,
-                Customers = customers
-            };
-
-            return View(viewModel);
+            return View("MovieForm", viewModel);
         }
 
-        [Route("movies/released/{year:regex(\\d{4})}/{month:regex(\\d{2}):range(1, 12)}")]
-        public ActionResult ByReleaseDate(int year, int month)
+        public ActionResult Edit(int id)
         {
-            return Content(year + "/" + month);
+            var movie = _context.Movies
+                            .SingleOrDefault(m => m.Id == id);
+
+            if (movie == null)
+                return HttpNotFound();
+
+            var viewModel = new MovieFormViewModel {
+                Movie = movie,
+                Genres = _context.Genres.ToList(),
+                Title = "Edit"
+            };
+
+            return View("MovieForm", viewModel);
+        }
+
+        public ActionResult Save(Movie movie)
+        {
+            if (movie.Id == 0)
+            {
+                movie.DateAdded = DateTime.Now;
+                _context.Movies.Add(movie);
+            }
+            else
+            {
+                var movieInDb = _context.Movies.Single(m => m.Id == movie.Id);
+
+                movieInDb.Name = movie.Name;
+                movieInDb.ReleaseDate = movie.ReleaseDate;
+                movieInDb.GenreId = movie.GenreId;
+                movieInDb.NumberInStock = movie.NumberInStock;
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Movies");
         }
 
         #region Unused Code
+        //public ActionResult Random()
+        //{
+        //    var movie = new Movie() { Name = "Bons de bico 2" };
+
+        //    var customers = new List<Customer> {
+        //        new Customer { Name = "Jean" },
+        //        new Customer { Name = "Zaito" }
+        //    };
+
+        //    var viewModel = new RandomMovieViewModel {
+        //        Movie = movie,
+        //        Customers = customers
+        //    };
+
+        //    return View(viewModel);
+        //}
+
+        //[Route("movies/released/{year:regex(\\d{4})}/{month:regex(\\d{2}):range(1, 12)}")]
+        //public ActionResult ByReleaseDate(int year, int month)
+        //{
+        //    return Content(year + "/" + month);
+        //}
         //public ActionResult Index(int? pageIndex, string sortBy)
         //{
         //    if (!pageIndex.HasValue)

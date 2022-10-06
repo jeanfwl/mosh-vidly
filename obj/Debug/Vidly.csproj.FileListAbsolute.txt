@@ -112,3 +112,5 @@ E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.Migrations.AddIsSubscribedToN
 E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.Migrations.AddMembershipType.resources
 E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.Migrations.PopulateMembershipTypes.resources
 E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.Migrations.ApplyAnnotationsToCustomerName.resources
+E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.Migrations.AddMembershipTypeName.resources
+E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.Migrations.UpdateMembershipTypeNames.resources

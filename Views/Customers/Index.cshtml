@@ -5,6 +5,10 @@
 }
 
 <h2>Customers</h2>
+<p>
+    @Html.ActionLink("New Customer", "New", "Customers", null, new { @class = "btn btn-info" })
+</p>
+
 @if (!Model.Any())
 {
     <p>There is no customers to show yet.</p>

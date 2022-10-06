@@ -53,7 +53,8 @@ namespace Vidly.Controllers
             var membershipTypes = _context.MembershipTypes.ToList();
 
             var viewModel = new CustomerFormViewModel {
-                MembershipTypes = membershipTypes
+                MembershipTypes = membershipTypes,
+                Title = "New"
             };
 
             return View("CustomerForm", viewModel);
@@ -68,7 +69,8 @@ namespace Vidly.Controllers
 
             var viewModel = new CustomerFormViewModel {
                 Customer = customer,
-                MembershipTypes = _context.MembershipTypes.ToList()
+                MembershipTypes = _context.MembershipTypes.ToList(),
+                Title = "Edit"
             };
 
             return View("CustomerForm", viewModel);

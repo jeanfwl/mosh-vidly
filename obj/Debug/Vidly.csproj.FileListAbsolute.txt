@@ -108,3 +108,7 @@ E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.dll
 E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.pdb
 E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.Migrations.InitialModel.resources
 E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.csproj.GenerateResource.cache
+E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.Migrations.AddIsSubscribedToNewsLetter.resources
+E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.Migrations.AddMembershipType.resources
+E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.Migrations.PopulateMembershipTypes.resources
+E:\Projetos extra\mosh-vidly\Vidly\obj\Debug\Vidly.Migrations.ApplyAnnotationsToCustomerName.resources

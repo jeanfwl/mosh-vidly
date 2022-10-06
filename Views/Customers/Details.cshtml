@@ -5,5 +5,12 @@
 }
 
 <h1>@Model.Name</h1>
+<ul>
+    <li>@Model.MembershipType.Name</li>
+    @if (Model.Birthdate.HasValue)
+            {
+                <li>@Model.Birthdate.Value.ToString("d")</li>
+            }
+</ul>
 
 

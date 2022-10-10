@@ -38,19 +38,23 @@ else
 
 @section scripts {
     <script>
-        $('#customers').on('click', '.js-delete', function () {
-            bootbox.confirm('Are you sure you want to delete this customer?', function (result) {
-                if (result) {
-                    const button = $(this);
-                    $.ajax({
-                        url: '/api/customers/' + button.data().customerId,
-                        method: 'DELETE',
-                        success: function () {
-                            button.parents('tr').remove();
-                        }
-                    });
-                }
+        $(document).ready(function () {
+            $('#customers').DataTable();
+
+            $('#customers').on('click', '.js-delete', function () {
+                bootbox.confirm('Are you sure you want to delete this customer?', function (result) {
+                    if (result) {
+                        const button = $(this);
+                        $.ajax({
+                            url: '/api/customers/' + button.data().customerId,
+                            method: 'DELETE',
+                            success: function () {
+                                button.parents('tr').remove();
+                            }
+                        });
+                    }
+                });
             });
-        });
+        })
     </script>
 }

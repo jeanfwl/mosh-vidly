@@ -23,7 +23,7 @@
 @section scripts {
     <script>
         $(document).ready(function () {
-            $('#customers').DataTable({
+            const table = $('#customers').DataTable({
                 ajax: {
                     url: '/api/customers',
                     dataSrc: ''
@@ -55,7 +55,10 @@
                             url: '/api/customers/' + button.data().customerId,
                             method: 'DELETE',
                             success: function () {
-                                button.parents('tr').remove();
+                                table
+                                    .row(button.parents('tr'))
+                                    .remove()
+                                    .draw();
                             }
                         });
                     }

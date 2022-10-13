@@ -11,8 +11,9 @@
     </div>
     <div class="form-group">
         <label>Movie</label>
-        <input type="text" value="" class="form-control" />
+        <input id="movie" type="text" value="" class="form-control" />
     </div>
+    <ul id="movies" class="list-group"></ul>
 
     <button class="btn btn-primary">Submit</button>
 </form>
@@ -20,7 +21,9 @@
 @section scripts {
     <script>
         $(document).ready(function () {
-            var vm = {};
+            var vm = {
+                movieIds: []
+            };
 
             var customers = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
@@ -33,7 +36,7 @@
             });
 
             $('#customer').typeahead({
-                minLength: 3, //mínimo caracteres para ser realizada a busca
+                minLength: 3, //mínimo caracteres digitados para ser realizada a busca
                 highlight: true //irá deixar em negrito os resultados filtrados
             }, {
                 name: 'customers',
@@ -41,6 +44,29 @@
                 source: customers
             }).on('typeahead:select', function (e, customer) { //evento ocorrido ao selecionar um item, podemos obter objeto no 2° argumento
                 vm.customerId = customer.id;
+            });
+
+            var movies = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/movies?query=%QUERY', //%QUERY é a variável (input do usuário)
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#movie').typeahead({
+                minLength: 3,
+                highlight: true
+            }, {
+                name: 'movies',
+                display: 'name',
+                source: movies
+            }).on('typeahead:select', function (e, movie) {
+                $('#movies').append(`<li>${movie.name}</li>`)
+                $('#movie').typeahead('val', '');
+
+                vm.movieIds.push(movie.id);
             });
         });
     </script>    

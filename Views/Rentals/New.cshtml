@@ -6,15 +6,15 @@
 
 <form id="newRental">
     <div class="form-group">
-        <label>Customer</label>
+        <label for="customer">Customer</label>
         <div class="tt-container">
-            <input id="customer" type="text" value="" class="form-control" />
+            <input id="customer" name="customer" data-rule-validCustomer="true" required type="text" value="" class="form-control" />
         </div>
     </div>
     <div class="form-group">
         <label>Movie</label>
         <div class="tt-container">
-            <input id="movie" type="text" value="" class="form-control" />
+            <input id="movie" name="movie" type="text" data-rule-validMovies="true" value="" class="form-control" />
         </div>
     </div>
     <div class="row">
@@ -27,6 +27,9 @@
 </form>
 
 @section scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+
     <script>
         $(document).ready(function () {
             var vm = {
@@ -54,6 +57,10 @@
                 vm.customerId = customer.id;
             });
 
+            $.validator.addMethod('validCustomer', function () {
+                return vm.customerId && vm.customerId !== 0;
+            }, "Please select a valid customer.");
+
             var movies = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -77,20 +84,35 @@
                 vm.movieIds.push(movie.id);
             });
 
-            $('#newRental').submit(function (e) {
-                e.preventDefault();
+            $.validator.addMethod('validMovies', function () {
+                return vm.movieIds.length
+            }, "Please select at least one movie.");
 
-                $.ajax({
-                    url: '/api/rentals',
-                    method: 'POST',
-                    data: vm
-                })
-                    .done(function () {
-                        toastr.success("Rentals successfully recorded.");
+
+            var validator = $('#newRental').validate({
+                submitHandler: function () {
+                    $.ajax({
+                        url: '/api/rentals',
+                        method: 'POST',
+                        data: vm
                     })
-                    .fail(function () {
-                        toastr.error("Something unexpected happened.");
-                    });
+                        .done(function () {
+                            toastr.success("Rentals successfully recorded.");
+
+                            $('#customer').typeahead('val', '');
+                            $('#movie').typeahead('val', '');
+                            $('#movies').empty();
+
+                            vm = { movieIds: [] };
+
+                            validator.resetForm();
+                        })
+                        .fail(function () {
+                            toastr.error("Something unexpected happened.");
+                        });
+
+                    return false;
+                }
             });
         });
     </script>    

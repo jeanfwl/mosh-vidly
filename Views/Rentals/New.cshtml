@@ -7,7 +7,7 @@
 <form>
     <div class="form-group">
         <label>Customer</label>
-        <input type="text" value="" class="form-control" />
+        <input id="customer" type="text" value="" class="form-control" />
     </div>
     <div class="form-group">
         <label>Movie</label>
@@ -16,3 +16,32 @@
 
     <button class="btn btn-primary">Submit</button>
 </form>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            var vm = {};
+
+            var customers = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                //prefetch: '../data/films/post_1960.json', //serve para pré-carregar com algum valor.
+                remote: {
+                    url: '/api/customers?query=%QUERY', //%QUERY é a variável (input do usuário)
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#customer').typeahead({
+                minLength: 3, //mínimo caracteres para ser realizada a busca
+                highlight: true //irá deixar em negrito os resultados filtrados
+            }, {
+                name: 'customers',
+                display: 'name',
+                source: customers
+            }).on('typeahead:select', function (e, customer) { //evento ocorrido ao selecionar um item, podemos obter objeto no 2° argumento
+                vm.customerId = customer.id;
+            });
+        });
+    </script>    
+}

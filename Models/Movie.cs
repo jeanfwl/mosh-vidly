@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Vidly.Models
@@ -20,6 +19,8 @@ namespace Vidly.Models
         [Display(Name = "Number In Stock")]
         [Range(1, 20)]
         public int NumberInStock { get; set; }
+
+        public int NumberAvailable { get; set; }
 
         public Genre Genre { get; set; }
 
